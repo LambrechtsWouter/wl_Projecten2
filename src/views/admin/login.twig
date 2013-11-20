@@ -1,0 +1,33 @@
+{# extend the parent tpl #}
+{% extends 'layout.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set css = 'login_admin.css' %}
+{% set js = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent %}
+
+<div id="container" class="clearfix">
+  
+<div class="logo">
+			<a href="{{ app.request.baseUrl }}"><img src="../img/logo_admin.jpg" alt="" /></a>
+		</div>
+		<div id="box">
+			<form action="#" method="post">
+			<p class="main">
+				<label>Username: </label>
+				<input name="username" value="username" /> 
+				<label>Password: </label>
+				<input type="password" name="password" value="asdf1234">	
+			</p>
+
+			<p class="space">
+
+				<input type="submit" value="Login" class="login" />
+			</p>
+			</form>
+		</div>
+ </div>
+{% endblock %}

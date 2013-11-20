@@ -1,0 +1,124 @@
+{# extend the parent tpl #}
+{% extends 'student/layout_student.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = 'jquery-ui-1.10.3.custom.js' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+
+<div id="container" class="clearfix">
+ <form action="#" method="post">
+	<div class="col-3 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="nav-header hidden-tablet">Wouter Lambrechts</li>
+						<li><a class="ajax-link"><span class="hidden-tablet">1. Geslaagde Vakken</span></a></li>
+						<li><a class="ajax-link"><span class="hidden-tablet"><strong>2. ISP opstellen</strong></span></a></li>
+						<li><a class="ajax-link"><span class="hidden-tablet">3. bevestigen met Eid</span></a></li>
+					</ul>
+				</div>
+				
+		<div class="well nav-collapse sidebar-nav">
+			<table class="table table-hover">
+			<tr>
+				<td>Semester 1</td>
+				<td><span id="s1"></span></td>
+			</tr>
+			<tr>
+				<td>Semester 2</td>
+				<td><span id="s2"></span></td>
+			</tr>
+			<tr>
+				<td>Totaal</td>
+				<td><span id="tot"></span></td>
+			</tr>
+			</table>
+		</div>
+		<div class="alert alert-danger">Maximum 62 studiepunten</div>
+		<div class="well nav-collapse sidebar-nav">
+					Ga door naar de volgende stap
+					<input type="submit" value="bevestig" class="login btn btn-primary" />
+				</div>
+	</div>
+
+ <div id="content" class="col-9">
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider"></span>
+					</li>
+					<li>
+						<a href="#">ISP opstellen</a>
+					</li>
+				</ul>
+			</div>
+	<div id="ListContainer">
+  <table><tr>
+    <td>
+    
+     <ul id='L_B' class='well L ui-sortable'>1ste semester - <span id="sem1"></span> Studiepunten
+     	{% for o in opnieuw %}
+     	{% if o.Semester == 1 %}
+     		<li class="noC red" name="{{ o.Studiepunten }}">
+    	 	   <label><input type="radio" name="{{o.idCourses}}" value="A" disabled="disabled"  />A</label>
+    	 	   <label><input type="radio" name="{{o.idCourses}}" class="B"  value="1" checked />B</label>
+   			   <label><input type="radio" name="{{o.idCourses}}" value="2" disabled="disabled"  />C</label>
+        		{{ o.Naam }} - Semester: {{ o.Semester }} - Studiepunten {{ o.Studiepunten }}
+        	</li>
+     	{% endif%}
+     	{% endfor %}
+     </ul>
+     <ul id='L_C' class='well L ui-sortable'>2de semester - <span id="sem2"></span> Studiepunten
+     {% for o in opnieuw %}
+     	{% if o.Semester == 2 %}
+     		<li class="noB red" name="{{ o.Studiepunten }}">
+    	 	   <label><input type="radio" name="{{o.idCourses}}" value="A" disabled="disabled" />A</label>
+    	 	   <label><input type="radio" name="{{o.idCourses}}" class="B"  value="1" />B</label>
+   			   <label><input type="radio" name="{{o.idCourses}}" value="2" checked />C</label>
+        		{{ o.Naam }} - Semester: {{ o.Semester }} - Studiepunten {{ o.Studiepunten }}
+        	</li>
+     	{% endif%}
+     	{% endfor %}
+     
+     </ul>    
+     <div>
+		<input type="checkbox" class="first" checked>1ste jaar</input>
+		<input type="checkbox" class="second" checked>2de jaar</input>
+		<input type="checkbox" class="third" checked>3de jaar</input>
+	</div>
+     <ul id="L" class="well L ui-sortable" style="min-width:67em">
+ 		 {% for vak in vakken %}
+     	{% if vak.Semester == 1 %}
+    	 	  <li class="noC {{ vak.Jaar }}" name="{{ vak.Studiepunten }}">
+    	 	   <label><input type="radio" name="{{vak.idCourses}}" value="A" />A</label>
+    	 	   <label><input type="radio" name="{{vak.idCourses}}" class="B"  value="1" />B</label>
+   			   <label><input type="radio" name="{{vak.idCourses}}" value="2" disabled="disabled"  />C</label>
+        		{{ vak.Naam }} - Semester: {{ vak.Semester }} - Studiepunten {{ vak.Studiepunten }}
+        	</li>
+        {% elseif vak.Semester == 2 %}
+          <li class="noB {{ vak.Jaar }}" name="{{ vak.Studiepunten }}">
+    	 	   <label><input type="radio" name="{{vak.idCourses}}" value="A" disabled="disabled" />A</label>
+    	 	   <label><input type="radio" name="{{vak.idCourses}}" class="B" value="1" />B</label>
+   			   <label><input type="radio" name="{{vak.idCourses}}" value="2"   />C</label>
+        		{{ vak.Naam }} - Semester: {{ vak.Semester }} - Studiepunten {{ vak.Studiepunten }}
+        	</li>
+    	{% endif%}
+    	{% endfor %} 
+    	 
+    </ul>
+   
+    </td>
+  </tr>
+  </table>
+</div>
+	<div class="well">
+		<p>hier kan je opmerken schrijven bij het opstellen van je vakken</p>
+		<textarea name="message"
+		style="width:100%" rows="4"></textarea>
+	</div>
+ </form>
+ </div>			
+{% endblock %}

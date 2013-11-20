@@ -1,0 +1,119 @@
+{# extend the parent tpl #}
+{% extends 'student/layout_student.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+{% set session = app.session.get('username') %}
+
+<div id="container" class="clearfix">
+	<div class="col-3 main-menu-span">
+		<div class="well nav-collapse sidebar-nav">
+			<ul class="nav nav-tabs nav-stacked main-menu">
+				<li class="nav-header hidden-tablet">{{session}}</li>
+				<li><a class="ajax-link" href="#"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="content" class="col-9">
+		<div>
+			<ul class="breadcrumb">
+				<li>
+					<a href="#">Home</a> <span class="divider"></span>
+				</li>
+				<li>
+					<a href="#">Dashboard</a>
+				</li>
+
+			</ul>
+		</div>
+	{% if login['vorige_klasgroep'] == null and login['student'] == null  %}	
+		<div class="col-8 col-offset-2">
+		 <form action="#" method="POST">
+			<div class="well">
+    			Beste Student,
+    			<p>
+    			In welke Klasgroep zat je vorige jaar
+				<select id="klas" name="klas">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					 {% if klassen is defined %}
+						{% for klas in klassen %}
+							<option value="{{klas.Naam}}" name="{{klas.Naam}}">{{ klas.Naam }}</option>
+						{% endfor %}
+					{% endif %}
+				</select>
+				</p>
+				<p>Ben je op dit moment een 
+				<select id="student" name="student">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					<option value="model">Modelstudent</option>
+					<option value="isp">ISP-student</option>
+				</select></p>
+				
+				<input type="submit" value="Bevestigen" class="login btn btn-primary" />
+    		</div>
+    		</form>
+		</div>
+	{% endif %}
+	{% if login['student']  == "isp"  %}	
+		<h2>ISP - student</h2>
+		<p>In plaats van voorgaande jaren moet je uw ISP-traject niet meer op school regelen</p>
+		<p>Maar bestaat er nu een online tool waar je zelf uw traject kan invullen</p>
+		<table class="table table-hover">
+				<tr>
+					<td>Schooljaar</td>
+					<td>ISP</td>
+					<td>status</td>
+					<td>Acties</td>
+				</tr>
+				{% if aanvraag != null %}
+					<tr>
+						<td>2013-2014</td>
+						<td>{{session }}</td>
+						<td>{{ aanvraag.toestand }}</td>
+						<td><a href="./isp_aanvraag/delete">Delete</a></br><a href="./vakken">edit</a></td>
+					</tr>
+				{% endif %}
+		</table>
+		
+		<div class="alert alert-danger">Let op!! Om uw ISP-traject te kunnen voltooien moet u in het bezit zijn van een id-lezer</div>
+		{% if aanvraag == null %}
+			<a href="./vakken"><button type="button" class="btn btn-info">Start ISP</button></a>
+		{% endif %}
+	{% endif %}	
+	{% if login['student']  == "model"  %}
+		<h2>model - student</h2>
+		<p>Uw het klasgroep is ....</p>
+		<p>raadpleeg hier u lesrooster <a href="./lesrooster">klik hier</a></p>
+	{% endif %}				
+	 <form action="#" method="POST">
+			<div class="well">
+    			<p>Ben je geen {{ login['student']}} ? Werk hier u gegevens bij.</p>
+    			<p>
+    			In welke Klasgroep zat je vorige jaar
+				<select id="klas" name="klas">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					 {% if klassen is defined %}
+						{% for klas in klassen %}
+							<option value="{{klas.Naam}}" name="{{klas.Naam}}">{{ klas.Naam }}</option>
+						{% endfor %}
+					{% endif %}
+				</select>
+				</p>
+				<p>Ben je op dit moment een 
+				<select id="student" name="student">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					<option value="model">Modelstudent</option>
+					<option value="isp">ISP-student</option>
+				</select></p>
+				
+				<input type="submit" value="Bevestigen" class="login btn btn-primary" />
+    		</div>
+    		</form>
+</div>			
+{% endblock %}

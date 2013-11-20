@@ -1,0 +1,168 @@
+{# extend the parent tpl #}
+{% extends 'admin/layout_admin.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+ 	<div id="content" class="col-9">
+			<form action="{{ app.request.baseUrl }}/admin/lesperklasgroep" method="POST">
+			<select id="klas" name="klas">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					{% for klas in klassen %}
+					<option value="{{klas.idklasgroep}}" name="{{klas.idklasgroep}}">{{ klas.Naam }}</option>
+					{% endfor %}
+			</select>
+			<input type="submit" value="Geef" class="Geef" />
+			<a id="semester1" href="#">1ste semester</a>
+			<a id="semester2" href="#">2de semester</a>
+			</form>
+		   {% if vakken is not null %}
+			<form action="./lesperklasgroep/addles" method="POST">
+				<div class="well">
+					<table>
+						<tr>
+							<td>
+							Dag:
+								<select id="dag" name="dag">
+									<option value="1" name="1">Maandag</option>
+									<option value="2" name="2">Dinsdag</option>
+									<option value="3" name="3">Woensdag</option>
+									<option value="4" name="4">Donderdag</option>
+									<option value="5" name="5">Vrijdag</option>
+								</select>
+							</td>
+							<td>
+							Lesuur:
+								<select id="uur" name="uur">
+									<option value="1" name="1">8u10 - 9u35</option>
+									<option value="2" name="2">9u45 - 11u10</option>
+									<option value="3" name="3">11u20 - 12u45</option>
+									<option value="4" name="4">13u30 - 14u55</option>
+									<option value="5" name="5">15u05 - 16u30</option>
+									<option value="5" name="5">16u40 - 18u00</option>
+								</select>
+							</td>
+
+							<td>
+								Vakken
+								<select id="vak" name="vak">
+									{% for vak in vakken %}
+									<option value="{{ vak.idCourses }}" name="{{ vak.idCourses }}">{{ vak.Naam }}</option>
+									{% endfor %}
+								</select>
+							</td>
+							<td>Max studenten <input type="text" name="max" value="" style="width:'45px" /></td>
+							<td>klasgroep {{klasgroep.Naam}}</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Weken</p>
+								<select id="week" name="week">
+									<option value="even" name="even">Even week</option>
+									<option value="oneven" name="oneven">Oneven Week</option>
+								</select>
+							</td> 
+							<td><p>Opmerking</p> <input type="text" name="opmerking" value="" style="width:'45px" placeholder="week 1 tot 6"/></td>
+						</tr>
+						<input type="hidden" name="klasgroep" value="{{klasgroep.idklasgroep}}">
+						<input type="submit" value="vak toevoegen" class="login btn btn-primary" />
+						
+					</table>
+				</div>
+			</form>	
+			{% endif %}
+			{% if sem1 %}
+				<table class="sem1 col-6 table table-striped ">
+				<tr><td>Maandag</td></tr>
+				{% for les in sem1 if les.Dag == 1 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				<tr><td>Dinsdag</td></tr>
+				{% for les in sem1 if les.Dag == 2 %}				
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}	
+				<tr><td>Woensdag</td></tr>
+				{% for les in sem1 if les.Dag == 3 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				<tr><td>Donderdag</td></tr>
+				{% for les in sem1 if les.Dag == 4 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				<tr><td>Vrijdag</td></tr>
+				{% for les in sem1 if les.Dag == 5 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				</table>
+			{% endif %}
+			{% if sem2 %}
+				<table id="sem2" class="sem2 col-6 table table-striped ">
+				<tr><td>Maandag</td></tr>
+				{% for les in sem2 if les.Dag == 1 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				<tr><td>Dinsdag</td></tr>
+				{% for les in sem2 if les.Dag == 2 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}	
+				<tr><td>Woensdag</td></tr>
+				{% for les in sem2 if les.Dag == 3 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				<tr><td>Donderdag</td></tr>
+				{% for les in sem2 if les.Dag == 4 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				<tr><td>Vrijdag</td></tr>
+				{% for les in sem2 if les.Dag == 5 %}
+					<tr>
+						<td>{{les.uur }}</td>
+						<td>{{ les.vak }}</td>
+						<td><a href="javascript:confirmDelete('{{ app.request.baseUrl }}/admin/lesperklasgroep/delete/{{les.idlesrooster }}')">Delete</a></td>
+					</tr>
+				{% endfor %}
+				</table>
+			{% endif %}
+	</div>
+
+{% endblock %}

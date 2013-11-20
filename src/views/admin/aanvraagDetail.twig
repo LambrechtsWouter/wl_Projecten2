@@ -1,0 +1,40 @@
+{# extend the parent tpl #}
+{% extends 'admin/layout_admin.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = 'aanvragen.css' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+
+ 	<div id="content" class="col-9">
+ 		<h2>ISP aanvragen - detail</h2>
+		<section id="itemDetails">
+
+		{% if itemDetails %}
+            {% for itemDetail in itemDetails %}
+            <article class = "itemDetail">
+						<p>Student: {{ itemDetail.name }}</p>
+						<p>Email: {{ itemDetail.email }}</p>
+						<p>Schooljaar: {{ itemDetail.schooljaar }}</p>
+						<p>Studiepunten: {{ itemDetail.studiepunten }}</p>
+						<p>Status ISP: {{ itemDetail.toestand }}</p>
+						<p>ISP aanmaakdatum: {{ itemDetail.datum }}</p>
+						<p>Commentaar:</br> {{ itemDetail.commentaar }}</p>
+            </article>
+
+        		<p><a href="goedkeuren/{{itemDetail.idISP_aanvraag}}">Goedkeuren</a></p>
+				<p><a href="afkeuren/{{itemDetail.idISP_aanvraag}}">Afkeuren</a></p>
+				<p><a href="mailen">Email sturen</a></p>
+	        {% endfor %}
+		{% else %}
+		<p>Deze aanvraag bestaat niet!</p>
+		{% endif %}
+
+
+		</section>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{# extend the parent tpl #}
+{% extends 'student/layout_student.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = 'lesrooster.js' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+{% set session = app.session.get('username') %}
+
+<div id="container" class="clearfix">
+	<div class="col-3 main-menu-span">
+		<div class="well nav-collapse sidebar-nav">
+			<ul class="nav nav-tabs nav-stacked main-menu">
+				<li class="nav-header hidden-tablet">{{session}}</li>
+				<li><a class="ajax-link" href="#"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="content" class="col-9">
+		<div>
+			<ul class="breadcrumb">
+				<li>
+					<a href="#">Home</a> <span class="divider"></span>
+				</li>
+				<li>
+					<a href="#">Lesrooster</a>
+				</li>
+
+			</ul>
+		</div>
+				
+		<h2>Lesrooster</h2>
+		<div class="well">
+			<ul>	
+				</li><a id="semester1" href="#">1ste semester</a><span class="divider"></<span></li>
+				</li><a id="semester2" href="#">2de semester</a></li>
+			</ul>
+		</div>
+		{% if error %}
+		<div>
+			{{error}}
+		</div>
+		{% else %}
+		<div class="sem1 clearfix">
+			<h3>Semester 1</h3>
+			<div class="well">
+			Maandag
+			{% for les in sem1 %}
+				{% if les.Dag == 1 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well">
+			Dinsdag
+			{% for les in sem1 %}
+				{% if les.Dag == 2 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well">
+			Woensdag
+			{% for les in sem1 %}
+				{% if les.Dag == 3 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well ">
+			Donderdag
+			{% for les in sem1 %}
+				{% if les.Dag == 4 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well ">
+			Vrijdag
+			{% for les in sem1 %}
+				{% if les.Dag == 5 %}		
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+		<div id="sem2" class="sem2 clearfix">
+			<h3>Semester 2</h3>
+			<div class="well ">
+			Maandag
+			{% for les in sem2 %}
+				{% if les.Dag == 1 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well ">
+			Dinsdag
+			{% for les in sem2 %}
+				{% if les.Dag == 2 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well ">
+			Woensdag
+			{% for les in sem2 %}
+				{% if les.Dag == 3 %}
+				 	<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well ">
+			Donderdag
+			{% for les in sem2 %}
+				{% if les.Dag == 4 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+			<div class="well ">
+			Vrijdag
+			{% for les in sem2%}
+				{% if les.Dag == 5 %}
+					<p>{{ les.uur }}  {{ les.vak }}</p>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>			
+{% endblock %}

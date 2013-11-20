@@ -1,0 +1,50 @@
+{# extend the parent tpl #}
+{% extends 'admin/layout_admin.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+ 	<div id="content" class="col-9">
+			<table class="sem1 col-6  table-striped ">
+				<tr>
+					<td>Naam</td>
+					<td>Maximum Studenten</td>
+					<td>Jaar</td>
+					<td>acties</td>
+				</tr>
+				{% for klas in klasgroepen %}
+				<tr>
+					<td>{{ klas.Naam }}</td>
+					<td>{{ klas.max_student }}</td>
+					<td>{{ klas.jaar }}</td>
+					<td><a href="{{ app.request.baseUrl }}/admin/klasgroepen/delete/{{klas.idklasgroep}}">Delete</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+			<form action="#" method="POST">
+				<div class="well col-6">
+					<dl>
+						<dt>Naam klasgroep</dt>
+						<dd><input type="text" name="klas"  /></dd>
+						<dt>Jaar</dt>
+						<dd>
+							<select name="jaar" value="jaar">
+								<option value="1">1ste jaar</option>
+								<option value="2">2de jaar</option>
+								<option value="3">3de jaar</option>
+							</select>
+						</dd>
+						<dt>Maximum aantal studenten in klasgroep</dt>
+						<dd><input type="text" name="max"  /></dd>
+						<dt>Bevestigen</dt>
+					<dd><input type="submit" value="bevestig" class="login btn btn-primary"  /></dd>
+				</div>	
+			</form>
+			
+	</div>
+
+{% endblock %}

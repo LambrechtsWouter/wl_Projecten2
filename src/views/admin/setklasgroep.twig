@@ -1,0 +1,40 @@
+{# extend the parent tpl #}
+{% extends 'admin/layout_admin.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+ 	<div id="content" class="col-9">
+			<p>Hieronder is er een lijst met alle modelstudenten die nog een nieuwe klasgroep moeten toegewijzen krijgen.</p>
+			<form action="#" method="POST">
+			<table class="sem1 col-6 table table-striped ">
+				<tr>
+					<td>Naam</td>
+					<td>Vorige Klasgroep</td>
+					<td>Huidige toewijzen klasgroep</td>
+				</tr>
+				{% for student in students %}
+				<tr>
+					<td>{{ student.Name }}</td>
+					<td>{{ student.vorige_klasgroep }}</td>
+					<td>
+						<select name="{{ student.idStudents }}" value="{{ student.idStudents }}">
+							 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+							{% for klas in klassen %}
+								<option value="{{klas.idklasgroep}}" name="{{klas.idklasgroep}}">{{ klas.Naam }}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<input type="submit" value="bevestig" class="login btn btn-primary"  />
+			</form>
+			
+	</div>
+
+{% endblock %}

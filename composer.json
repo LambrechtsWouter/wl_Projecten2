@@ -1,0 +1,23 @@
+{
+	"require": {
+		"silex/silex": "1.0.*@dev",
+        "twig/twig": "1.*",
+        "doctrine/dbal": "2.*",
+        "symfony/symfony": "2.2.*",
+        "symfony/security": "~2.1",
+        "symfony/http-kernel": ">=2.1.0, <= 2.2.99",
+        "swiftmailer/swiftmailer": "4.3.*@dev",
+        "knplabs/repository-service-provider": "dev-master",
+        "symfony/twig-bridge": "2.*",
+        "symfony/form": "~2.1",
+	"symfony/validator": "~2.1",
+        "symfony/config": "~2.1",
+        "symfony/translation": "~2.1",
+        "cboden/Ratchet": "0.2.*"
+	},
+        "autoload": {
+		"psr-0": {
+			"projecten2": "src/"
+		}
+	}
+}

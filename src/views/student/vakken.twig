@@ -1,0 +1,165 @@
+{# extend the parent tpl #}
+{% extends 'student/layout_student.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{% set bool = "false" %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+<form action="#" method="post">
+<div id="container" class="clearfix">
+	<div class="col-3 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="nav-header hidden-tablet">Wouter Lambrechts</li>
+						<li><a class="ajax-link"><span class="hidden-tablet"><strong>1. Geslaagde Vakken</strong></span></a></li>
+						<li><a class="ajax-link"><span class="hidden-tablet">2. ISP opstellen</span></a></li>
+						<li><a class="ajax-link"><span class="hidden-tablet">3. bevestigen met Eid</span></a></li>
+					</ul>
+				</div>
+				<div class="well nav-collapse sidebar-nav">
+				<p>geslaagd vakken: <span id="OLA_sucess"></span></p>
+				<p>Niet-geslaagd vakken: <span id="OLA_unsucess"></span></p>
+				</div>
+				
+				<div class="well nav-collapse sidebar-nav">
+					Ga door naar de volgende stap
+					<input type="submit" value="ISP opstellen" class="login btn btn-primary" />
+				</div>
+	</div>
+
+ <div id="content" class="col-9">
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider"></span>
+					</li>
+					<li>
+						<a href="#">Vakken geslaagd / Niet geslaagd</a>
+					</li>
+				</ul>
+			</div>
+	<div>
+		<input type="checkbox" id="first" checked>1ste jaar</input>
+		<input type="checkbox" id="second" checked>2de jaar</input>
+		<input type="checkbox" id="third" checked>3de jaar</input>
+	</div>
+	{% if points is not null %}
+	{% for vak in vakken %}
+		{% set bool = "false" %}
+		{% for point in points %}
+			
+			{% if point.courses_idCourses == vak.idCourses %}
+				{% set bool = "true" %}
+				{% if vak.Jaar == 1 %}
+	 				<div class="well first col-6">
+	 			{% elseif vak.Jaar == 2 %}
+	 				<div class="well second col-6">
+	 			{% elseif vak.Jaar == 3 %}
+	 				<div class="well third col-6">
+	 			{% endif%}
+				<p class="col-5">{{ vak.Naam }}</p>
+			
+			<div class="col-6">
+				<select class="OLA" name="{{ vak.idCourses }}">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					<option value="success">Geslaagd</option>
+					<option value="unsuccess">Niet Geslaagd</option>
+					<option value="tolerate">Getolereerd</option>
+				</select>
+			</div>
+			
+			<a class="img" href="#"><span class="icon-large icon-up-arrow img-circle"></span></a>
+			<a class="img1" href="#"><span class="icon-large icon-down-arrow img-circle"></span></a>
+			<div class="well-sm clearfix">
+			{% for vakOla in ola %}
+				{% if vakOla.id_OPO == vak.idCourses  %}
+				<div>
+					<p class="col-6">{{vakOla.Naam }}</p>
+					<p class="col-6"><input id="1" type="radio" class="OPO score" value="success" name="{{ vakOla.idCourses }}">Geslaagd</input><input id="1" type="radio" class="OPO score" name="{{ vakOla.idCourses }}" value="unsuccess">Niet geslaagd</input></p>	
+				</div>
+				{% endif%}
+			{% endfor %}
+			</div>
+		</div>
+			{% endif%}
+			
+		{% endfor %}
+		{% if bool == "false" %}
+				{% if vak.Jaar == 1 %}
+	 				<div class="well first col-6">
+	 			{% elseif vak.Jaar == 2 %}
+	 				<div class="well second col-6">
+	 			{% elseif vak.Jaar == 3 %}
+	 				<div class="well third col-6">
+	 			{% endif%}
+				<p class="col-5">{{ vak.Naam }}</p>
+			
+			<div class="col-6">
+				<select class="OLA" name="{{ vak.idCourses }}">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					<option value="success">Geslaagd</option>
+					<option value="unsuccess">Niet Geslaagd</option>
+					<option value="tolerate">Getolereerd</option>
+				</select>
+			</div>
+			
+			<a class="img" href="#"><span class="icon-large icon-up-arrow img-circle"></span></a>
+			<a class="img1" href="#"><span class="icon-large icon-down-arrow img-circle"></span></a>
+			<div class="well-sm clearfix">
+			{% for vakOla in ola %}
+				{% if vakOla.id_OPO == vak.idCourses  %}
+				<div>
+					<p class="col-6">{{vakOla.Naam }}</p>
+					<p class="col-6"><input id="1" type="radio" class="OPO score" value="success" name="{{ vakOla.idCourses }}">Geslaagd</input><input id="1" type="radio" class="OPO score" name="{{ vakOla.idCourses }}" value="unsuccess">Niet geslaagd</input></p>	
+				</div>
+				{% endif%}
+			{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+	{% endif %}
+	
+	{% if points is null %}
+	 {% for vaks in vakken %}
+	 	{% if vaks.Jaar == 1 %}
+	 		<div class="well first col-6">
+	 	{% elseif vaks.Jaar == 2 %}
+	 		<div class="well second col-6">
+	 	{% elseif vaks.Jaar == 3 %}
+	 	<div class="well third col-6">
+	 	{% endif%}
+			<p class="col-5">{{ vaks.Naam }}</p>
+			
+			<div class="col-6">
+				<select class="OLA" name="{{ vaks.idCourses }}">
+					 <option disabled="disabled" selected="selected">Maak een keuze...</option>
+					<option value="success">Geslaagd</option>
+					<option value="unsuccess">Niet Geslaagd</option>
+					<option value="tolerate">Getolereerd</option>
+				</select>
+			</div>
+			
+			<a class="img" href="#"><span class="icon-large icon-up-arrow img-circle"></span></a>
+			<a class="img1" href="#"><span class="icon-large icon-down-arrow img-circle"></span></a>
+			<div class="well-sm clearfix">
+			{% for vakOla in ola %}
+				{% if vakOla.id_OPO == vaks.idCourses  %}
+				<div>
+					<p class="col-6">{{vakOla.Naam }}</p>
+					<p class="col-6"><input id="1" type="radio" class="OPO score" value="success" name="{{ vakOla.idCourses }}">Geslaagd</input><input id="1" type="radio" class="OPO score" name="{{ vakOla.idCourses }}" value="unsuccess">Niet geslaagd</input></p>	
+				</div>
+				{% endif%}
+			{% endfor %}
+			</div>
+		</div>
+	{% endfor %}
+	{% endif %}
+</div>
+ </div>	
+</form>		
+{% endblock %}

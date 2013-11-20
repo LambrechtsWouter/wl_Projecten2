@@ -1,0 +1,33 @@
+{# extend the parent tpl #}
+{% extends 'admin/layout_admin.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+ 	<div id="content" class="col-9">
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider"></span>
+					</li>
+					<li>
+						<a href="#">Dashboard</a>
+					</li>
+
+				</ul>
+			</div>
+
+			<h2>Welkom op de module om ISP-trajecten van studenten te verwerken.</h2>
+			<h3>Onderdelen</h3>
+			<ul>
+				<li><p>Aanvragen: Alle huidige ISP-aanvragen.</p></li>
+				<li><p>Vakken: Het huidige curriculum.</p></li>
+				<li><p>Volgtijdelijkheden: De onderlinge afhankelijkheden van alle vakken.</p></li>
+			</ul>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{# extend the parent tpl #}
+{% extends 'layout.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint-Lieven' %}
+{% set css = '' %}
+{% set js = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent %}
+
+<div id="container" class="clearfix">
+  
+	<div >
+		<h1>Welkom op de trajectbegeleidingswebsite van de KaHo Sint-Lieven</h1>
+		<p>Klik op één van de twee links om naar de gewenste loginpagina te gaan.<p>
+		<p><a href="{{ app.request.getBaseURL() }}/student">student</a></p>
+		<p><a href="{{ app.request.getBaseURL() }}/admin">leerkracht</a></p>
+ 	</div>
+{% endblock %}

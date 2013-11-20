@@ -1,0 +1,46 @@
+	
+
+	ul {
+	    margin:0;
+	    list-style-type:none;
+	    padding:0;
+	}
+	
+	#L li {
+		width: 49%;
+		float: left;
+	}
+	ul.ui-sortable {
+	    height:23em;
+	    overflow:auto;
+	    border:1px solid silver;
+	    float: left;
+	    min-width: 33em;
+	}
+	ul.cat {
+	    height:8.3em;
+	    margin-bottom:2px;
+	}
+	.red {
+	background-color:crimson;
+	}
+	ul.ui-sortable li {
+	   color: black;
+		background-color: ivory;
+		border: 1px solid silver;
+		margin: 2px;
+		height: 36px;
+		padding: 6px;
+	}
+	.disabled {
+	    background-color:#ccc;color:red;
+	}
+.lightgreen{
+	background-color: lightgreen;
+}
+
+.lightblue {
+	background-color: lightblue;
+}	
+
+

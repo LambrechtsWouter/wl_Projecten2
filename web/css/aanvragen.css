@@ -1,0 +1,43 @@
+/* ----------------------------------------------------- */
+/* 					overzichtpagina 					 */
+/* ----------------------------------------------------- */
+#itemDetails{
+	width: 99%;
+}
+
+
+/* eerste lijst */
+#info{
+	border-bottom: 3px solid #666666;
+	width: 99%;
+	height: 30px;
+}
+
+#info li{
+	width: 24%;
+	float:left;
+}
+
+/* informatie overzicht van isp aanvragen */
+.info{
+	padding-top: 10px;
+	width: 99%;
+}
+.info li{
+	width: 24%;
+	float:left;
+	height: 30px;
+
+}
+
+#pagenumbers{
+	width: 99%;
+}
+/* ----------------------------------------------------- */
+/* 					Detailpaginga 						 */
+/* ----------------------------------------------------- */
+
+
+
+
+

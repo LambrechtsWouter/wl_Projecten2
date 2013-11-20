@@ -1,0 +1,87 @@
+{# extend the parent tpl #}
+{% extends 'student/layout_student.twig' %}
+
+
+{# set the pagetitle in the parent tpl #}
+{% set pageTitle = 'Trajectbegeleiding - ICT Kaho Sint Lieven' %}
+{% set js = '' %}
+{% set css = '' %}
+{# overwrite the pageContent block #}
+{% block pageContent1 %}
+
+<div id="container" class="clearfix">
+		<div class="col-3 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="nav-header hidden-tablet">Wouter Lambrechts</li>
+						<li><a class="ajax-link"><span class="hidden-tablet">1. Geslaagde Vakken</span></a></li>
+						<li><a class="ajax-link"><span class="hidden-tablet">2. ISP opstellen</span></a></li>
+						<li><a class="ajax-link"><span class="hidden-tablet"><strong>3. bevestigen met Eid</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+ <div id="content" class="col-9">
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider"></span>
+					</li>
+					<li>
+						<a href="#">ISP bevestiging</a>
+					</li>
+
+				</ul>
+			</div>
+	<div class="well first col-6">		
+		<h2>1ste Semester</h2>
+		<table class="table table-striped">
+		<tr>
+		<td>Vak</td>
+		<td>Studiepunten</td>
+		</tr>
+		
+			 {% for vak in semester1 %}
+			 <tr>
+			 <td>{{vak.Naam }}</td>
+			 <td> {{ vak.Studiepunten }}</td>
+			 </tr>
+			{% endfor %}
+		
+		</table>
+	</div>
+	<div class="well first col-6">
+		<h2>2de Semester</h2>
+		<table class="table table-striped">
+		<tr>
+		<td>Vak</td>
+		<td>Studiepunten</td>
+		</tr>
+		
+		 {% for vak in semester2 %}
+		 <tr>
+			 <td>{{vak.Naam }}</td>
+			 <td> {{ vak.Studiepunten }}</td>
+		</tr>
+		{% endfor %}
+		
+		</table>
+	</div>
+	<div class="well col-8 col-offset-2">                  
+                <form action="#" method="post">     
+                        <p>Plaats uw identiteitskaart in de eID-lezer en klik op de knop om te lezen.</p>
+                        <input type="submit" value="Lees ID" class="login btn btn-primary" />
+                </form>
+        </div>
+        {% if gegevens.FirstName is defined %}
+        <div class="well col-8 col-offset-2">    
+                <form action="#" method="post">
+                        <p>Welkom, {{ gegevens.FirstName }} {{ gegevens.LastName }}</p>
+                        <p>Klik op op onderstaande knop om uw ISP door te sturen.</p>
+                        <input type="submit" value="Doorsturen" class="login btn btn-primary" />
+                </form>                
+	</div>
+        {% endif %}
+</div>
+ </div>			
+{% endblock %}
